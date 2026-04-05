@@ -79,3 +79,10 @@ export async function loginRequest(email: string, password: string): Promise<Log
     body: JSON.stringify({ email, password }),
   });
 }
+
+export async function registerRequest(email: string, password: string): Promise<LoginResponse> {
+  return api<LoginResponse>("/auth/register", {
+    method: "POST",
+    body: JSON.stringify({ email, password }),
+  });
+}

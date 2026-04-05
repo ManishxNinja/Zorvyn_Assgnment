@@ -43,6 +43,15 @@ a {
   color: var(--accent);
 }
 
+.inline-link {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.inline-link:hover {
+  text-decoration: underline;
+}
+
 code {
   font-family: var(--mono);
   font-size: 0.9em;

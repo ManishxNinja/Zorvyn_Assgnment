@@ -7,7 +7,7 @@ import {
   type ReactNode,
 } from "react";
 import type { AuthUser } from "../api/client";
-import { clearToken, getStoredUser, loginRequest } from "../api/client";
+import { clearToken, getStoredUser, loginRequest, registerRequest } from "../api/client";
 
 type AuthState = {
   user: AuthUser | null;
@@ -17,6 +17,7 @@ type AuthState = {
 
 type AuthContextValue = AuthState & {
   login: (email: string, password: string) => Promise<void>;
+  register: (email: string, password: string) => Promise<void>;
   logout: () => void;
 };
 
@@ -39,6 +40,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setUser(res.user);
   }, []);
 
+  const register = useCallback(async (email: string, password: string) => {
+    const res = await registerRequest(email, password);
+    localStorage.setItem("token", res.accessToken);
+    localStorage.setItem("user", JSON.stringify(res.user));
+    setToken(res.accessToken);
+    setUser(res.user);
+  }, []);
+
   const logout = useCallback(() => {
     clearToken();
     setToken(null);
@@ -51,9 +60,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       token,
       ready,
       login,
+      register,
       logout,
     }),
-    [user, token, ready, login, logout],
+    [user, token, ready, login, register, logout],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

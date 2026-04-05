@@ -81,13 +81,13 @@ A small UI in [`frontend/`](frontend/) helps you explore the API: login, dashboa
    npm run dev
    ```
 
-3. Open the URL Vite prints (usually `http://localhost:5173`). Sign in with a seeded or admin-created user.
+3. Open the URL Vite prints (usually `http://localhost:5173`). Use **Sign up** for a new VIEWER account, or sign in with a seeded/admin-created user.
 
 The UI stores the JWT in `localStorage` and hides **Records** / **Users** navigation based on role.
 
 ## API overview
 
-All routes except `POST /auth/login` and `GET /health` require:
+All routes except `POST /auth/login`, `POST /auth/register`, and `GET /health` require:
 
 ```http
 Authorization: Bearer <access_token>
@@ -98,6 +98,7 @@ Authorization: Bearer <access_token>
 | Method | Path | Description |
 |--------|------|-------------|
 | POST | `/auth/login` | `{ "email", "password" }` → `{ accessToken, user, ... }` |
+| POST | `/auth/register` | `{ "email", "password" }` (min 8 chars) → creates **VIEWER**, returns same token shape as login (`201`) |
 
 ### Users (ADMIN only)
 

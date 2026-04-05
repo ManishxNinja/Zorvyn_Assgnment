@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { ApiError } from "../api/client";
 
@@ -65,7 +65,12 @@ export function LoginPage() {
           </button>
         </form>
         <p className="hint muted">
-          Default seed (if unchanged): <code>admin@example.com</code> / <code>ChangeMeAdmin1!</code>
+          No account?{" "}
+          <Link to="/register" className="inline-link">
+            Sign up
+          </Link>{" "}
+          (new users are viewers). Default seed: <code>admin@example.com</code> /{" "}
+          <code>ChangeMeAdmin1!</code>
         </p>
       </div>
     </div>
