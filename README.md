@@ -66,6 +66,25 @@ Backend for a finance dashboard: **Express**, **TypeScript**, **Prisma**, **Post
 
    Server defaults to `http://localhost:3000` (override with `PORT`).
 
+## Demo frontend (React + Vite)
+
+A small UI in [`frontend/`](frontend/) helps you explore the API: login, dashboard metrics, records (analyst/admin), and user admin (admin only).
+
+1. Keep the API running on port **3000** (or set `VITE_API_URL` to match).
+
+2. In another terminal:
+
+   ```bash
+   cd frontend
+   cp .env.example .env   # optional; default API is http://localhost:3000
+   npm install
+   npm run dev
+   ```
+
+3. Open the URL Vite prints (usually `http://localhost:5173`). Sign in with a seeded or admin-created user.
+
+The UI stores the JWT in `localStorage` and hides **Records** / **Users** navigation based on role.
+
 ## API overview
 
 All routes except `POST /auth/login` and `GET /health` require:
